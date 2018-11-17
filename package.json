@@ -1,0 +1,40 @@
+{
+  "name": "fuzzy-search-item",
+  "version": "0.0.0",
+  "description": "a fuzzy search form item",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config=webpack.config.js",
+    "server": "webpack-dev-server --config=webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaotianxia/fuzzy-search-item.git"
+  },
+  "keywords": [
+    "vue",
+    "element-ui",
+    "fuzzy-search"
+  ],
+  "author": "Denzel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaotianxia/fuzzy-search-item/issues"
+  },
+  "homepage": "https://github.com/xiaotianxia/fuzzy-search-item#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.23.1",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}

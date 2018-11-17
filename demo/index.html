@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.9/lib/theme-chalk/index.css">
+	<script src='https://unpkg.com/vue@2.2.6'></script>
+	<script src="https://unpkg.com/element-ui@2.4.9/lib/index.js"></script>
+	<script src="https://unpkg.com/lodash@4.17.11/lodash.js"></script>
+	<script src="./api/index.js"></script>
+	<script src="../dist/fuzzy-search-item.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<el-form ref="form" inline :model="formData">
+            <el-form-item label="姓名" prop="name">
+                <fuzzy-search-item
+                    v-model="formData.name"
+                    api-names="api.user.searchUsers"
+                    success-key="status==0"
+                    response-key="data.list"
+                    query-param="userName"
+                    :extra-params="{id: 123, n: 234}"
+                    unique-key="userId"
+                    label="userName"
+                    placeholder="输入姓名模糊搜索..."
+                    @change="onChange">
+                </fuzzy-search-item>
+            </el-form-item>
+        </el-form>
+	</div>
+
+	<script>
+		new Vue({
+			el: '#app',
+
+			data () {
+				return {
+					formData: {
+						name: 'sss'
+					}
+				}
+			},
+
+			methods: {
+				onChange (e) {
+					console.log('所选数据', e);
+				}
+			}
+		});
+	</script>
+</body>
+</html>
