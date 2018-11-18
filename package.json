@@ -1,6 +1,6 @@
 {
   "name": "fuzzy-search-item",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a fuzzy search form item",
   "main": "webpack.config.js",
   "scripts": {
