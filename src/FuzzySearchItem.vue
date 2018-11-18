@@ -13,7 +13,6 @@
         :loading="loading">
         <el-option
             v-for="item in list"
-            :disabled="item.disabled"
             :key="item[uniqueKey]"
             :label="item[label]"
             :value="item[uniqueKey]">
@@ -32,16 +31,15 @@ export default {
     },
 
     props: [
-        'apiNames',
-        'successKey',
-        'responseKey',
+        'apiPath',
+        'successCondition',
+        'responsePath',
         'queryParam',
         'extraParams',
         'uniqueKey',
         'label',
         'disabled',
         'placeholder',
-        'moreText',
         'value'
     ],
 
@@ -66,15 +64,15 @@ export default {
 
             param[this.queryParam] = e;
 
-            let success = this.successKey.split('==');
+            let success = this.successCondition.split('==');
 
             this.loading = true;
-            eval(this.apiNames)(param).then(res => {
+            eval(this.apiPath)(param).then(res => {
                 this.loading = false;
                 //eg: res.satus == 0
                 if(res[success[0]] == success[1]) {
                     //eg: res.data.list
-                    this.list = eval('res.' + this.responseKey);
+                    this.list = eval('res.' + this.responsePath);
                 }
             });
         },

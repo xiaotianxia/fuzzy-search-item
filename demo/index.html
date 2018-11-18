@@ -5,27 +5,33 @@
 	<title>index</title>
 	<link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.9/lib/theme-chalk/index.css">
 	<script src='https://unpkg.com/vue@2.2.6'></script>
-	<script src="https://unpkg.com/element-ui@2.4.9/lib/index.js"></script>
+	<script src="https://unpkg.com/element-ui@2.4.10/lib/index.js"></script>
 	<script src="https://unpkg.com/lodash@4.17.11/lodash.js"></script>
 	<script src="./api/index.js"></script>
 	<script src="../dist/fuzzy-search-item.min.js"></script>
 </head>
 <body>
 	<div id="app">
-		<el-form ref="form" inline :model="formData">
-            <el-form-item label="姓名" prop="name">
+		<el-form ref="form" inline :model="formData" :rules="rules">
+            <el-form-item label="姓名:" prop="name">
                 <fuzzy-search-item
                     v-model="formData.name"
-                    api-names="api.user.searchUsers"
-                    success-key="status==0"
-                    response-key="data.list"
+                    clearable
+                    api-path="api.user.searchUsers"
+                    success-condition="status==0"
+                    response-path="data.list"
                     query-param="userName"
                     :extra-params="{id: 123, n: 234}"
                     unique-key="userId"
                     label="userName"
                     placeholder="输入姓名模糊搜索..."
+                    @focus="onFocus"
                     @change="onChange">
                 </fuzzy-search-item>
+            </el-form-item>
+
+            <el-form-item label="地址:">
+                <span>{{formData.address}}</span>
             </el-form-item>
         </el-form>
 	</div>
@@ -37,15 +43,36 @@
 			data () {
 				return {
 					formData: {
-						name: 'sss'
-					}
+                        id: '',
+						name: '',
+                        address: ''
+					},
+
+                    rules: {
+                        name: [
+                            { required: true, message: '请选择姓名', trigger: 'change' }
+                        ]
+                    }
 				}
 			},
 
 			methods: {
 				onChange (e) {
 					console.log('所选数据', e);
-				}
+                    if(e.data.userId) {
+                        this.formData.name = e.data.userName;
+                        this.formData.id = e.data.userId;
+                        this.formData.address = e.data.address;
+                    } else {
+                        this.formData.name = '';
+                        this.formData.id = '';
+                        this.formData.address = '';
+                    }
+				},
+
+                onFocus (e) {
+                    console.log(e.event.type)
+                }
 			}
 		});
 	</script>
